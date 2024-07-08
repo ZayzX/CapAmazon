@@ -1,0 +1,123 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url(img.jpg);
+}
+
+header {
+    background: transparent;
+    padding: 20px;
+    text-align: center;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(255, 255, 255, .2);
+}
+
+#searchBar {
+    width: 1000px;
+    height: 45px;
+    background: white;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+}
+
+#tagsContainer {
+    margin-top: 10px;
+}
+
+.tag {
+    width: 75px;
+    height: 45px;
+    background: white;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+    
+}
+
+.tag.active {
+    background-color: #888;
+}
+
+main {
+    padding: 20px;
+}
+
+.article {
+    background: transparent;
+    margin: 20px 0;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, .1);
+    border: rgba(255, 255, 255, .1);
+    outline: none;
+    border-radius: 40px;
+    backdrop-filter: blur(20px);
+    color: white;
+    text-align: center;
+}
+
+.article h2 {
+    margin-top: 0;
+}
+
+.tags {
+    margin-top: 10px;
+    font-style: italic;
+}
+
+#pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+#pagination button {
+    background: white;
+    margin: 20px 0;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, .1);
+    border: rgba(255, 255, 255, .1);
+    outline: none;
+    border-radius: 40px;
+    backdrop-filter: blur(20px);
+    color: white;
+    text-align: center;
+    color: black;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+#pagination span {
+    margin: 0 10px;
+}
+
+h1 {
+    color: white;
+}
+
+body button {
+    width: 125px;
+    height: 45px;
+    background: white;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+}

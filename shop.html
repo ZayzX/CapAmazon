@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site avec Articles, Tags et Pagination</title>
+    <link rel="stylesheet" href="shop.css">
+</head>
+<body>
+    <header>
+        <h1>Articles</h1>
+        <input type="text" id="searchBar" placeholder="Rechercher des articles...">
+        <div id="tagsContainer">
+            <button class="tag" data-tag="Livre">Livre</button>
+            <button class="tag" data-tag="Blocs">Blocs</button>
+            <button class="tag" data-tag="PVP">PVP</button>
+            <button class="tag" data-tag="Minerai">Minerai</button>
+            <button class="tag" data-tag="Missile">Missile</button>
+            <button class="tag" data-tag="Mars">Mars</button>
+            <button class="tag" data-tag="Lune">Lune</button>
+            <button class="tag" data-tag="Lootbox">Lootbox</button>
+            <button class="tag" data-tag="Machine">Machine</button>
+        </div>
+    </header>
+    <main id="articlesContainer">
+        <!-- Les articles seront chargés ici dynamiquement -->
+    </main>
+    <div id="pagination">
+        <button id="prevPage">Précédent</button>
+        <span id="pageInfo">Page 1</span>
+        <button id="nextPage">Suivant</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

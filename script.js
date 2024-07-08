@@ -1,45 +1,48 @@
 document.addEventListener("DOMContentLoaded", function() {
+    // Initialisez EmailJS avec votre clé publique
+    emailjs.init("frCyAOIJI8daXAuh8");
+
     const articlesData = [
         { 
-            title: "Ender Pearl", 
-            content: "Prix : 35$/u", 
+            title: "Premier Article", 
+            content: "Contenu du premier article...", 
+            tags: ["Livre", "Blocs"],
+            link: "https://example.com/article1"
+        },
+        { 
+            title: "Deuxième Article", 
+            content: "Contenu du deuxième article...", 
             tags: ["PVP"],
-            link: "https://discord.com/channels/1259586333521874994/1259586721440596071" // Lien pour le premier article
+            link: "https://example.com/article2"
         },
         { 
-            title: "Oak Wood", 
-            content: "Prix : 0.50$/u", 
-            tags: ["Blocs"],
-            link: "https://discord.com/channels/1259586333521874994/1259587189877243924" // Lien pour le deuxième article
+            title: "Troisième Article", 
+            content: "Contenu du troisième article...", 
+            tags: ["Minerai", "Missile"],
+            link: "https://example.com/article3"
         },
         { 
-            title: "Armor Book", 
-            content: "Prix : 250$/u", 
-            tags: ["Livre", "PVP"],
-            link: "https://discord.com/channels/1259586333521874994/1259588071746437120" // Lien pour le troisième article
+            title: "Quatrième Article", 
+            content: "Contenu du quatrième article...", 
+            tags: ["Mars"],
+            link: "https://example.com/article4"
         },
         { 
-            title: "Tools Book", 
-            content: "Prix : 100$/u", 
-            tags: ["Livre"],
-            link: "https://discord.com/channels/1259586333521874994/1259869208003481720" // Lien pour le quatrième article
+            title: "Cinquième Article", 
+            content: "Contenu du cinquième article...", 
+            tags: ["Lune"],
+            link: "https://example.com/article5"
         },
         { 
-            title: "Classic Lootbox ",  
-            content: "prix : 1500$/u", 
-            tags: ["Lootbox"],
-            link: "https://discord.com/channels/1259586333521874994/1259909828487417968" // Lien pour le cinquième article
-        },
-        { 
-            title: "Legendary Lootbox", 
-            content: "15K$/u", 
-            tags: ["Lootbox"],
-            link: "https://discord.com/channels/1259586333521874994/1259909872451981363" // Lien pour le sixième article
+            title: "Sixième Article", 
+            content: "Contenu du sixième article...", 
+            tags: ["Lootbox", "Machine"],
+            link: "https://example.com/article6"
         },
         // Ajoutez plus d'articles ici pour tester la pagination
     ];
 
-    const articlesPerPage = 3;
+    const articlesPerPage = 2;
     let currentPage = 1;
 
     const searchBar = document.getElementById("searchBar");
@@ -48,6 +51,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const prevPageButton = document.getElementById("prevPage");
     const nextPageButton = document.getElementById("nextPage");
     const pageInfo = document.getElementById("pageInfo");
+
+    const modal = document.getElementById("modal");
+    const closeModal = document.getElementsByClassName("close")[0];
+    const purchaseForm = document.getElementById("purchaseForm");
+    let currentArticle = null;
 
     searchBar.addEventListener("keyup", updateArticles);
     tags.forEach(tag => {
@@ -69,6 +77,36 @@ document.addEventListener("DOMContentLoaded", function() {
             currentPage++;
             updateArticles();
         }
+    });
+
+    closeModal.addEventListener("click", function() {
+        modal.style.display = "none";
+    });
+
+    window.addEventListener("click", function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    });
+
+    purchaseForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const quantity = document.getElementById("quantity").value;
+        const email = document.getElementById("email").value;
+
+        // Envoi de l'email
+        emailjs.send("service_03zcxso", "template_evvoeww", {
+            to_email: email,
+            article_title: currentArticle.title,
+            article_link: currentArticle.link,
+            quantity: quantity
+        })
+        .then(function(response) {
+            alert("E-mail envoyé avec succès !");
+            modal.style.display = "none";
+        }, function(error) {
+            alert("Échec de l'envoi de l'e-mail : " + JSON.stringify(error));
+        });
     });
 
     function filteredArticles() {
@@ -102,10 +140,19 @@ document.addEventListener("DOMContentLoaded", function() {
                 <h2>${article.title}</h2>
                 <p>${article.content}</p>
                 <div class="tags">Tags: ${article.tags.join(", ")}</div>
-                <br>
-                <button class="buy-button" onclick="window.location.href='${article.link}'">Acheter</button>
+                <button class="buy-button" data-title="${article.title}" data-link="${article.link}">Acheter</button>
             `;
             articlesContainer.appendChild(articleElement);
+        });
+
+        const buyButtons = document.querySelectorAll(".buy-button");
+        buyButtons.forEach(button => {
+            button.addEventListener("click", function() {
+                const title = this.getAttribute("data-title");
+                const link = this.getAttribute("data-link");
+                currentArticle = { title, link };
+                modal.style.display = "block";
+            });
         });
 
         pageInfo.textContent = `Page ${currentPage}`;
